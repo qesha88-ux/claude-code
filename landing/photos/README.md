@@ -1,14 +1,10 @@
 # Photos
 
-Drop your photos here with these exact names and the page picks them up automatically.
-Until a file exists, the page shows an empty camera-frame placeholder.
+Drop photos here with these exact names and the page picks them up automatically.
 
-| File | Where it appears | Suggested shape |
+| File | Where it appears | Shape |
 | --- | --- | --- |
-| `portrait.jpg` | Small portrait at the top | Square, at least 400×400 |
-| `fest.jpg` | Frames: Oyu Fest, main stage | Landscape 4:3, about 1600×1200 |
-| `set.jpg` | Frames: On set | Landscape 4:3 |
-| `live.jpg` | Frames: Oyu Live session | Landscape 4:3 |
-| `backstage.jpg` | Frames: Backstage | Landscape 4:3 |
+| `portrait.jpg` | Round portrait at the top | Square, at least 400×400 |
+| `1.jpg`, `2.jpg`, `3.jpg` | A row of three photos under the intro (hidden until at least one exists) | Portrait 3:4, about 900×1200 |
 
-Keep each file under about 500 KB so the page loads fast on phones.
+Keep each file under about 400 KB so the page loads fast on phones.

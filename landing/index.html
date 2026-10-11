@@ -3,201 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Yerkebulan Kurishbayev, producer from Kazakhstan. Events, festivals, film production and team training.">
+<meta name="description" content="Yerkebulan Kurishbayev, producer from Kazakhstan. Festivals, films, live music and team training.">
 <title>Yerkebulan Kurishbayev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&display=swap">
-<style>
-/* Layout: one narrow left-aligned column, like a producer's notebook; credits set like film end titles; photo slots drawn as camera frames. */
-:root {
-  --bg: #f6f7f6;
-  --fg: #17191c;
-  --muted: #676d74;
-  --line: #dde1e3;
-  --wash: #eceff0;
-  --accent: #1f6fa8;
-
-  --display: "Spectral", Georgia, "Times New Roman", serif;
-  --body: "Golos Text", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
-
-  --step-0: 1.0625rem;
-  --step-s: 0.8125rem;
-  --step-1: 1.25rem;
-  --step-2: 1.75rem;
-  --step-3: clamp(2.25rem, 6vw, 3.25rem);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #101214; --fg: #e7e9eb; --muted: #959ca3; --line: #262a2e; --wash: #181b1e; --accent: #79b8e6;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #101214; --fg: #e7e9eb; --muted: #959ca3; --line: #262a2e; --wash: #181b1e; --accent: #79b8e6;
-  color-scheme: dark;
-}
-
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font: 400 var(--step-0)/1.65 var(--body);
-}
-a { color: inherit; text-decoration-color: var(--line); text-underline-offset: 3px; text-decoration-thickness: 1px; transition: text-decoration-color .2s, color .2s; }
-a:hover { color: var(--accent); text-decoration-color: currentColor; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
-
-/* Language switching: only the active language's copies are shown */
-.site[data-lang="en"] [data-l]:not([data-l="en"]),
-.site[data-lang="ru"] [data-l]:not([data-l="ru"]),
-.site[data-lang="kk"] [data-l]:not([data-l="kk"]) { display: none; }
-
-.site {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding-inline: 20px;
-  padding-block: 28px 64px;
-  display: grid;
-  gap: 72px;
-}
-
-/* Header */
-.top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
-.wordmark { font: 500 var(--step-s)/1 var(--mono); letter-spacing: .04em; text-decoration: none; }
-.langs { display: flex; gap: 2px; }
-.langs button {
-  font: 500 var(--step-s)/1 var(--mono); letter-spacing: .06em;
-  background: none; border: 0; color: var(--muted); padding: 8px 10px; border-radius: 6px; cursor: pointer;
-}
-.langs button:hover { color: var(--fg); }
-.langs button[aria-pressed="true"] { color: var(--fg); background: var(--wash); }
-
-/* Hero */
-.hero { display: grid; gap: 22px; }
-.avatar {
-  position: relative; width: 104px; height: 104px; border-radius: 14px; overflow: hidden;
-  background: var(--wash); display: grid; place-items: center;
-  font: 300 2rem/1 var(--display); color: var(--muted);
-}
-.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-h1 {
-  margin: 0; font: 300 var(--step-3)/1.08 var(--display); letter-spacing: -.01em; text-wrap: balance;
-}
-h1 em { font-style: italic; color: var(--accent); }
-.lede { margin: 0; max-width: 34rem; font-size: var(--step-1); line-height: 1.55; text-wrap: pretty; }
-.tags { margin: 0; font: 400 var(--step-s)/1.6 var(--mono); color: var(--muted); letter-spacing: .02em; }
-.ctas { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 4px; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  font: 500 .9375rem/1 var(--body); padding: 12px 16px; border-radius: 999px; text-decoration: none;
-  border: 1px solid var(--line);
-}
-.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-
-/* Sections */
-section { display: grid; gap: 20px; }
-.label {
-  margin: 0; font: 500 var(--step-s)/1 var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--muted);
-}
-p { margin: 0; }
-.prose { display: grid; gap: 14px; max-width: 36rem; }
-
-/* Story: a real chronology, so it gets a timeline */
-.story { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; position: relative; }
-.story::before { content: ""; position: absolute; left: 4px; top: 10px; bottom: 10px; width: 1px; background: var(--line); }
-.story li { position: relative; padding-left: 28px; display: grid; gap: 4px; }
-.story li::before {
-  content: ""; position: absolute; left: 0; top: 9px; width: 9px; height: 9px; border-radius: 50%;
-  background: var(--bg); border: 1px solid var(--muted);
-}
-.story li:last-child::before { background: var(--accent); border-color: var(--accent); }
-.story h3 { margin: 0; font: 500 var(--step-0)/1.4 var(--body); }
-
-/* Services */
-.services { display: grid; gap: 26px; }
-.service { display: grid; gap: 6px; }
-.service h3 { margin: 0; font: 400 var(--step-2)/1.2 var(--display); }
-
-/* Credits, set like end titles */
-.credits { margin: 0; display: grid; gap: 14px; }
-.credit { display: grid; grid-template-columns: 11rem 1fr; gap: 4px 20px; align-items: baseline; }
-.credit dt { font: 400 var(--step-s)/1.5 var(--mono); color: var(--muted); text-align: right; text-transform: uppercase; letter-spacing: .06em; }
-.credit dd { margin: 0; min-width: 0; }
-.credit .name { font-weight: 500; }
-.credit .links { font: 400 var(--step-s)/1.5 var(--mono); color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
-
-/* Notes (blog) */
-.notes { display: grid; border-top: 1px solid var(--line); }
-.note { border-bottom: 1px solid var(--line); }
-.note summary {
-  list-style: none; cursor: pointer; padding: 18px 0; display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: baseline;
-}
-.note summary::-webkit-details-marker { display: none; }
-.note summary h3 { margin: 0; font: 400 var(--step-1)/1.35 var(--display); text-wrap: balance; transition: color .2s; }
-.note summary:hover h3 { color: var(--accent); }
-.note .meta { font: 400 var(--step-s)/1 var(--mono); color: var(--muted); white-space: nowrap; }
-.note .meta::after { content: " +"; }
-.note[open] .meta::after { content: " −"; }
-.note .body { padding: 0 0 26px; display: grid; gap: 14px; max-width: 36rem; }
-.note ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
-
-/* Frames: photo slots drawn as viewfinders until a photo is added */
-.frames { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-.frames figure { margin: 0; display: grid; gap: 8px; }
-.frame {
-  position: relative; aspect-ratio: 4 / 3; max-width: 100%; border-radius: 8px; overflow: hidden;
-  background:
-    linear-gradient(var(--line), var(--line)) 33.33% 0 / 1px 100% no-repeat,
-    linear-gradient(var(--line), var(--line)) 66.66% 0 / 1px 100% no-repeat,
-    linear-gradient(var(--line), var(--line)) 0 33.33% / 100% 1px no-repeat,
-    linear-gradient(var(--line), var(--line)) 0 66.66% / 100% 1px no-repeat,
-    var(--wash);
-}
-.frame .slot {
-  position: absolute; inset: 0; display: grid; place-items: center; padding: 12px; text-align: center;
-  font: 400 .6875rem/1.4 var(--mono); color: var(--muted); letter-spacing: .02em;
-}
-.frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.frames figcaption { font: 400 var(--step-s)/1.4 var(--mono); color: var(--muted); }
-
-/* Contact */
-.email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
-.email { font: 300 var(--step-2)/1.2 var(--display); user-select: all; overflow-wrap: anywhere; }
-.copy {
-  font: 500 var(--step-s)/1 var(--mono); letter-spacing: .04em;
-  background: var(--wash); color: var(--fg); border: 0; padding: 9px 12px; border-radius: 999px; cursor: pointer;
-}
-.copy:hover { color: var(--accent); }
-.socials { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font: 400 var(--step-s)/1.6 var(--mono); }
-
-footer { font: 400 var(--step-s)/1.5 var(--mono); color: var(--muted); }
-
-@media (max-width: 520px) {
-  .site { gap: 56px; }
-  .credit { grid-template-columns: 1fr; }
-  .credit dt { text-align: left; }
-  .frames { grid-template-columns: 1fr; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .hero > * { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
-  .hero > *:nth-child(2) { animation-delay: .06s; }
-  .hero > *:nth-child(3) { animation-delay: .12s; }
-  .hero > *:nth-child(4) { animation-delay: .18s; }
-  .hero > *:nth-child(5) { animation-delay: .24s; }
-  @keyframes rise { from { transform: translateY(8px); } to { transform: none; } }
-}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500&family=JetBrains+Mono:wght@400;500&family=Spectral:ital,wght@0,300;0,400;1,300&display=swap">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 <div class="site" data-lang="en" id="site">
 
   <header class="top">
-    <a class="wordmark" href="#top" id="top">YERKEBULAN KURISHBAYEV</a>
     <nav class="langs" aria-label="Language">
       <button type="button" id="lang-en" data-set="en" aria-pressed="true">EN</button>
       <button type="button" id="lang-ru" data-set="ru" aria-pressed="false">RU</button>
@@ -205,344 +21,76 @@ footer { font: 400 var(--step-s)/1.5 var(--mono); color: var(--muted); }
     </nav>
   </header>
 
-  <main style="display:grid;gap:inherit">
+  <div class="intro">
+    <div class="avatar" aria-hidden="true">YK<img src="photos/portrait.jpg" alt="" onerror="this.remove()"></div>
+    <h1>Yerkebulan <em>Kurishbayev</em></h1>
+    <p class="line">
+      <span data-l="en">Producer from Kazakhstan. I make festivals, films and live music, and teach teams to do the same.</span>
+      <span data-l="ru">Продюсер из Казахстана. Делаю фестивали, кино и живую музыку и учу команды делать так же.</span>
+      <span data-l="kk">Қазақстандық продюсер. Фестивальдер, кино және тірі музыка жасаймын, командаларды да осыған үйретемін.</span>
+    </p>
+    <p class="facts">
+      <span data-l="en">10 years · 3 feature films · Oyu Fest</span>
+      <span data-l="ru">10 лет · 3 фильма · Oyu Fest</span>
+      <span data-l="kk">10 жыл · 3 фильм · Oyu Fest</span>
+    </p>
+  </div>
 
-    <div class="hero">
-      <div class="avatar" aria-hidden="true">YK<img src="photos/portrait.jpg" alt="" onerror="this.remove()"></div>
-      <h1>
-        <span data-l="en">Hi, I’m <em>Yerkebulan</em>.</span>
-        <span data-l="ru">Привет, я <em>Еркебулан</em>.</span>
-        <span data-l="kk">Сәлем, мен <em>Еркебұлан</em>.</span>
-      </h1>
-      <p class="lede">
-        <span data-l="en">I’m a producer from Kazakhstan. For ten years I’ve made films, music videos, commercials and festivals, and built the teams behind them. I can produce your event or project, or teach your team to do it.</span>
-        <span data-l="ru">Я продюсер из Казахстана. Десять лет я делаю фильмы, клипы, рекламу и фестивали и собираю команды, которые за ними стоят. Могу спродюсировать ваше событие или проект или научить этому вашу команду.</span>
-        <span data-l="kk">Мен Қазақстандық продюсермін. Он жыл бойы фильмдер, клиптер, жарнамалар мен фестивальдер жасап, олардың артындағы командаларды құрып келемін. Сіздің іс-шараңызды не жобаңызды продюсерлей аламын немесе бұған командаңызды үйрете аламын.</span>
-      </p>
-      <p class="tags">
-        <span data-l="en">Events · Festivals · Film · Music · Teaching</span>
-        <span data-l="ru">События · Фестивали · Кино · Музыка · Обучение</span>
-        <span data-l="kk">Іс-шаралар · Фестивальдер · Кино · Музыка · Оқыту</span>
-      </p>
-      <div class="ctas">
-        <a class="btn primary" href="#contact">
-          <span data-l="en">Work with me</span><span data-l="ru">Работать со мной</span><span data-l="kk">Бірге жұмыс істеу</span>
-        </a>
-        <a class="btn" href="#notes">
-          <span data-l="en">Read my notes</span><span data-l="ru">Читать заметки</span><span data-l="kk">Жазбаларды оқу</span>
-        </a>
-      </div>
+  <div class="strip" id="strip" hidden>
+    <img src="photos/1.jpg" alt="">
+    <img src="photos/2.jpg" alt="">
+    <img src="photos/3.jpg" alt="">
+  </div>
+
+  <section aria-labelledby="h-work">
+    <h2 class="label" id="h-work"><span data-l="en">Work</span><span data-l="ru">Проекты</span><span data-l="kk">Жобалар</span></h2>
+    <ul class="rows">
+      <li><a href="https://www.instagram.com/oyu.fest/" target="_blank" rel="noopener">
+        <span class="name">Oyu Fest</span>
+        <span class="desc"><span data-l="en">music festival</span><span data-l="ru">музыкальный фестиваль</span><span data-l="kk">музыкалық фестиваль</span></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a></li>
+      <li><a href="https://youtube.com/@oyulive" target="_blank" rel="noopener">
+        <span class="name">Oyu Live</span>
+        <span class="desc"><span data-l="en">live music and artists</span><span data-l="ru">живая музыка и артисты</span><span data-l="kk">тірі музыка мен әртістер</span></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a></li>
+      <li><a href="https://www.instagram.com/qara.studios/" target="_blank" rel="noopener">
+        <span class="name">Qara Studios</span>
+        <span class="desc"><span data-l="en">films and production</span><span data-l="ru">кино и продакшн</span><span data-l="kk">кино және продакшн</span></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-notes">
+    <h2 class="label" id="h-notes"><span data-l="en">Notes</span><span data-l="ru">Заметки</span><span data-l="kk">Жазбалар</span></h2>
+    <ul class="rows notes">
+      <li><a href="notes/every-job.html">
+        <span class="name"><span data-l="en">Learn every job on set first</span><span data-l="ru">Сначала освой каждую работу на площадке</span><span data-l="kk">Алдымен алаңдағы әр жұмысты меңгер</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li><a href="notes/people.html">
+        <span class="name"><span data-l="en">A producer’s real job is people</span><span data-l="ru">Главная работа продюсера — люди</span><span data-l="kk">Продюсердің басты жұмысы — адамдар</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+      <li><a href="notes/five-questions.html">
+        <span class="name"><span data-l="en">Five questions before you plan an event</span><span data-l="ru">Пять вопросов перед планированием события</span><span data-l="kk">Іс-шара алдындағы бес сұрақ</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a></li>
+    </ul>
+  </section>
+
+  <section class="contact" aria-labelledby="h-contact">
+    <h2 class="label" id="h-contact"><span data-l="en">Hire me or invite me to teach</span><span data-l="ru">Пригласить в проект или на обучение</span><span data-l="kk">Жобаға не оқытуға шақыру</span></h2>
+    <div class="email-row">
+      <a class="email" id="email" href="mailto:qesha88@gmail.com">qesha88@gmail.com</a>
+      <button type="button" class="copy" id="copy-email"><span data-l="en">Copy</span><span data-l="ru">Скопировать</span><span data-l="kk">Көшіру</span></button>
     </div>
+  </section>
 
-    <section aria-labelledby="h-story">
-      <h2 class="label" id="h-story"><span data-l="en">Story</span><span data-l="ru">История</span><span data-l="kk">Менің жолым</span></h2>
-      <ol class="story">
-        <li>
-          <h3><span data-l="en">A camera and curiosity</span><span data-l="ru">Камера и любопытство</span><span data-l="kk">Камера мен қызығушылық</span></h3>
-          <p>
-            <span data-l="en">I started as a video enthusiast, shooting anything I could and trying every role on set.</span>
-            <span data-l="ru">Я начинал как энтузиаст видео: снимал всё, что мог, и пробовал каждую роль на площадке.</span>
-            <span data-l="kk">Мен видеоға әуесқой ретінде бастадым: қолымнан келгеннің бәрін түсіріп, алаңдағы әр рөлді байқап көрдім.</span>
-          </p>
-        </li>
-        <li>
-          <h3><span data-l="en">Music videos and commercials</span><span data-l="ru">Клипы и реклама</span><span data-l="kk">Клиптер мен жарнама</span></h3>
-          <p>
-            <span data-l="en">I founded a production company focused on music videos and commercials. It taught me budgets, deadlines and how to keep a crew together.</span>
-            <span data-l="ru">Я основал продакшн-компанию, которая снимала музыкальные клипы и рекламу. Там я научился считать бюджеты, держать сроки и сохранять команду.</span>
-            <span data-l="kk">Музыкалық клиптер мен жарнама түсіретін продакшн-компания аштым. Сол жерде бюджет есептеуді, мерзімді сақтауды және команданы ұстап тұруды үйрендім.</span>
-          </p>
-        </li>
-        <li>
-          <h3><span data-l="en">Feature films</span><span data-l="ru">Кино</span><span data-l="kk">Кино</span></h3>
-          <p>
-            <span data-l="en">The company grew into a film studio. We produced three full-length feature films.</span>
-            <span data-l="ru">Компания выросла в киностудию. Мы сняли три полнометражных фильма.</span>
-            <span data-l="kk">Компания киностудияға айналды. Біз үш толықметражды фильм түсірдік.</span>
-          </p>
-        </li>
-        <li>
-          <h3>Oyu Live</h3>
-          <p>
-            <span data-l="en">Next came Oyu Live, a project for developing the music scene: live sessions, artist management and new names.</span>
-            <span data-l="ru">Потом появился Oyu Live, проект для развития музыкальной сцены: живые сессии, менеджмент артистов и новые имена.</span>
-            <span data-l="kk">Кейін Oyu Live пайда болды. Бұл музыкалық сахнаны дамытуға арналған жоба: тірі сессиялар, әртіс менеджменті және жаңа есімдер.</span>
-          </p>
-        </li>
-        <li>
-          <h3>Oyu Fest</h3>
-          <p>
-            <span data-l="en">Then Oyu Fest, one of the largest music festivals in Kazakhstan. Today we are one of the most successful companies in the country’s creative industry.</span>
-            <span data-l="ru">Затем Oyu Fest, один из крупнейших музыкальных фестивалей Казахстана. Сегодня мы одна из самых успешных компаний в креативной индустрии страны.</span>
-            <span data-l="kk">Содан соң Oyu Fest, Қазақстандағы ең ірі музыкалық фестивальдердің бірі. Бүгін біз елдің креативті индустриясындағы ең табысты компаниялардың біріміз.</span>
-          </p>
-        </li>
-      </ol>
-    </section>
-
-    <section aria-labelledby="h-do">
-      <h2 class="label" id="h-do"><span data-l="en">What I do</span><span data-l="ru">Чем я занимаюсь</span><span data-l="kk">Не істеймін</span></h2>
-      <div class="services">
-        <div class="service">
-          <h3><span data-l="en">Events and festivals</span><span data-l="ru">События и фестивали</span><span data-l="kk">Іс-шаралар мен фестивальдер</span></h3>
-          <p>
-            <span data-l="en">Concept, booking, production and the show itself. From a private event to a festival stage.</span>
-            <span data-l="ru">Концепция, букинг, продакшн и само шоу. От частного мероприятия до фестивальной сцены.</span>
-            <span data-l="kk">Концепция, букинг, продакшн және шоудың өзі. Жеке іс-шарадан фестиваль сахнасына дейін.</span>
-          </p>
-        </div>
-        <div class="service">
-          <h3><span data-l="en">Production</span><span data-l="ru">Продакшн</span><span data-l="kk">Продакшн</span></h3>
-          <p>
-            <span data-l="en">Feature films, music videos and commercials. I assemble the crew, run the budget and deliver on schedule.</span>
-            <span data-l="ru">Полнометражное кино, клипы и реклама. Собираю команду, веду бюджет и сдаю в срок.</span>
-            <span data-l="kk">Толықметражды кино, клиптер және жарнама. Команда жинаймын, бюджетті басқарамын және уақытында тапсырамын.</span>
-          </p>
-        </div>
-        <div class="service">
-          <h3><span data-l="en">Teaching your team</span><span data-l="ru">Обучение команд</span><span data-l="kk">Командаңызды оқыту</span></h3>
-          <p>
-            <span data-l="en">Workshops and mentoring: how to plan a production, run a set or an event day, and ship on time.</span>
-            <span data-l="ru">Воркшопы и менторство: как планировать продакшн, вести площадку или день события и выпускать проект вовремя.</span>
-            <span data-l="kk">Воркшоптар мен менторлық: продакшнды жоспарлау, түсірілім алаңын не іс-шара күнін басқару және жобаны уақытында шығару.</span>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section aria-labelledby="h-credits">
-      <h2 class="label" id="h-credits"><span data-l="en">Credits</span><span data-l="ru">Титры</span><span data-l="kk">Титрлер</span></h2>
-      <dl class="credits">
-        <div class="credit">
-          <dt><span data-l="en">Founder, producer</span><span data-l="ru">Основатель, продюсер</span><span data-l="kk">Негізін қалаушы, продюсер</span></dt>
-          <dd>
-            <div><span class="name">Oyu Fest</span> · <span data-l="en">music festival</span><span data-l="ru">музыкальный фестиваль</span><span data-l="kk">музыкалық фестиваль</span></div>
-            <div class="links"><a href="https://www.instagram.com/oyu.fest/" target="_blank" rel="noopener">Instagram ↗</a></div>
-          </dd>
-        </div>
-        <div class="credit">
-          <dt><span data-l="en">Founder, producer</span><span data-l="ru">Основатель, продюсер</span><span data-l="kk">Негізін қалаушы, продюсер</span></dt>
-          <dd>
-            <div><span class="name">Oyu Live</span> · <span data-l="en">live sessions and artists</span><span data-l="ru">живые сессии и артисты</span><span data-l="kk">тірі сессиялар мен әртістер</span></div>
-            <div class="links">
-              <a href="https://youtube.com/@oyulive" target="_blank" rel="noopener">YouTube ↗</a>
-              <a href="https://www.instagram.com/oyu.live" target="_blank" rel="noopener">Instagram ↗</a>
-            </div>
-          </dd>
-        </div>
-        <div class="credit">
-          <dt><span data-l="en">Producer</span><span data-l="ru">Продюсер</span><span data-l="kk">Продюсер</span></dt>
-          <dd>
-            <div><span class="name">Qara Studios</span> · <span data-l="en">3 feature films</span><span data-l="ru">3 полнометражных фильма</span><span data-l="kk">3 толықметражды фильм</span></div>
-            <div class="links"><a href="https://www.instagram.com/qara.studios/" target="_blank" rel="noopener">Instagram ↗</a></div>
-          </dd>
-        </div>
-        <div class="credit">
-          <dt><span data-l="en">Producer</span><span data-l="ru">Продюсер</span><span data-l="kk">Продюсер</span></dt>
-          <dd><span data-l="en">Music videos and commercials</span><span data-l="ru">Музыкальные клипы и реклама</span><span data-l="kk">Музыкалық клиптер мен жарнама</span></dd>
-        </div>
-        <div class="credit">
-          <dt><span data-l="en">Artist management</span><span data-l="ru">Менеджмент артистов</span><span data-l="kk">Әртіс менеджменті</span></dt>
-          <dd><span data-l="en">Artists of the Oyu Live scene</span><span data-l="ru">Артисты сцены Oyu Live</span><span data-l="kk">Oyu Live сахнасының әртістері</span></dd>
-        </div>
-      </dl>
-    </section>
-
-    <section aria-labelledby="h-notes" id="notes">
-      <h2 class="label" id="h-notes"><span data-l="en">Notes</span><span data-l="ru">Заметки</span><span data-l="kk">Жазбалар</span></h2>
-      <p class="prose">
-        <span data-l="en">What I’ve learned producing films, shows and festivals. Short, practical, written for people who make things.</span>
-        <span data-l="ru">Чему я научился, продюсируя фильмы, шоу и фестивали. Коротко и по делу, для тех, кто делает проекты.</span>
-        <span data-l="kk">Фильмдер, шоулар мен фестивальдер жасау барысында үйренгенім. Қысқа әрі нақты, жоба жасайтындарға арналған.</span>
-      </p>
-      <div class="notes">
-
-        <details class="note" id="note-every-job">
-          <summary>
-            <h3><span data-l="en">Learn every job on set first</span><span data-l="ru">Сначала освой каждую работу на площадке</span><span data-l="kk">Алдымен алаңдағы әр жұмысты меңгер</span></h3>
-            <span class="meta"><span data-l="en">2 min</span><span data-l="ru">2 мин</span><span data-l="kk">2 мин</span></span>
-          </summary>
-          <div class="body" data-l="en">
-            <p>I started with a camera and no plan. I shot friends’ music videos for free, held the boom, drove the van and edited at night. None of it felt like producing at the time. Looking back, it was the best training I could have had.</p>
-            <p>A producer makes hundreds of decisions about other people’s work. When you have done that work yourself, even badly, you know what a request really costs. You know why the gaffer needs another hour and when the editor is padding a deadline.</p>
-            <p>If you want to produce, spend your first year doing every job you can get. Then move up.</p>
-          </div>
-          <div class="body" data-l="ru">
-            <p>Я начинал с камерой и без плана. Бесплатно снимал клипы друзьям, держал микрофонную удочку, водил машину с техникой и монтировал по ночам. Тогда это не казалось продюсированием. Сейчас понимаю, что лучшей школы у меня не было.</p>
-            <p>Продюсер принимает сотни решений о чужой работе. Если ты сам делал эту работу, пусть даже плохо, ты знаешь, чего на самом деле стоит каждая просьба. Понимаешь, зачем осветителю ещё час и когда монтажёр закладывает лишнее время.</p>
-            <p>Если хочешь стать продюсером, первый год делай любую работу, какую дадут. Потом поднимайся выше.</p>
-          </div>
-          <div class="body" data-l="kk">
-            <p>Мен камерамен және ешқандай жоспарсыз бастадым. Достарыма тегін клип түсірдім, микрофон ұстадым, техника тасыған көлікті жүргіздім, түнде монтаж жасадым. Ол кезде бұл продюсерлік сияқты көрінбеді. Қазір түсінемін, одан жақсы мектеп болмаған.</p>
-            <p>Продюсер басқалардың жұмысы туралы жүздеген шешім қабылдайды. Сол жұмысты өзің жасап көрсең, тіпті нашар болса да, әр өтініштің шын бағасын білесің. Жарықшыға тағы бір сағаттың не үшін керек екенін, монтажшының мерзімді қашан әдейі созып жатқанын түсінесің.</p>
-            <p>Продюсер болғың келсе, бірінші жылы қолыңа түскен кез келген жұмысты істе. Содан кейін жоғары көтеріл.</p>
-          </div>
-        </details>
-
-        <details class="note" id="note-people">
-          <summary>
-            <h3><span data-l="en">A producer’s real job is people</span><span data-l="ru">Главная работа продюсера — люди</span><span data-l="kk">Продюсердің басты жұмысы — адамдар</span></h3>
-            <span class="meta"><span data-l="en">2 min</span><span data-l="ru">2 мин</span><span data-l="kk">2 мин</span></span>
-          </summary>
-          <div class="body" data-l="en">
-            <p>Budgets, permits and schedules matter, but they are the easy part. The hard part is keeping forty people pulling in one direction at 4 a.m. on the third night of a shoot.</p>
-            <p>What works for me: hire people who are better than you at their craft, tell them the real situation including the bad news, and protect them from chaos that isn’t theirs to solve. Pay on time, every time. A producer’s reputation is mostly how crews talk about them after the project.</p>
-            <p>A crew that wants to work with you again is worth more than any piece of equipment.</p>
-          </div>
-          <div class="body" data-l="ru">
-            <p>Бюджеты, разрешения и графики важны, но это лёгкая часть. Сложная часть: удержать сорок человек в одном направлении в четыре утра на третью ночь съёмок.</p>
-            <p>Что работает у меня: нанимать людей, которые в своём ремесле сильнее тебя, говорить им правду, включая плохие новости, и защищать их от хаоса, который не им разгребать. Платить вовремя, всегда. Репутация продюсера во многом складывается из того, как о нём говорит команда после проекта.</p>
-            <p>Команда, которая хочет снова с тобой работать, стоит больше любой техники.</p>
-          </div>
-          <div class="body" data-l="kk">
-            <p>Бюджет, рұқсаттар мен кесте маңызды, бірақ бұл оңай бөлігі. Қиыны түсірілімнің үшінші түнінде, таңғы төртте қырық адамды бір бағытта ұстап тұру.</p>
-            <p>Маған көмектесетіні: өз ісінде сенен мықты адамдарды жалдау, оларға шындықты, жаман жаңалықты да айту және оларды өздері шешпеуге тиіс хаостан қорғау. Ақыны уақытында төлеу, әрдайым. Продюсердің беделі көбіне жобадан кейін команданың ол туралы не айтатынынан құралады.</p>
-            <p>Сенімен қайта жұмыс істегісі келетін команда кез келген техникадан қымбат.</p>
-          </div>
-        </details>
-
-        <details class="note" id="note-five-questions">
-          <summary>
-            <h3><span data-l="en">Five questions before you plan an event</span><span data-l="ru">Пять вопросов перед тем, как планировать событие</span><span data-l="kk">Іс-шараны жоспарламас бұрын бес сұрақ</span></h3>
-            <span class="meta"><span data-l="en">1 min</span><span data-l="ru">1 мин</span><span data-l="kk">1 мин</span></span>
-          </summary>
-          <div class="body" data-l="en">
-            <p>Before you book a venue or an artist, answer these:</p>
-            <ol>
-              <li>Who exactly is coming, and why would they leave home for this?</li>
-              <li>What should a guest feel or remember on the way out?</li>
-              <li>What is the real budget, including a 15% reserve for surprises?</li>
-              <li>Who makes the final call when something goes wrong on the day?</li>
-              <li>What does success look like in numbers: tickets, reach, sponsors?</li>
-            </ol>
-            <p>If you can’t answer one of them, that is where the project will break. I ask these at the start of every project.</p>
-          </div>
-          <div class="body" data-l="ru">
-            <p>Прежде чем бронировать площадку или артиста, ответьте на них:</p>
-            <ol>
-              <li>Кто именно придёт и зачем им выходить ради этого из дома?</li>
-              <li>Что гость должен почувствовать или запомнить на выходе?</li>
-              <li>Какой реальный бюджет, включая резерв 15% на сюрпризы?</li>
-              <li>Кто принимает финальное решение, если в день события что-то пошло не так?</li>
-              <li>Как выглядит успех в цифрах: билеты, охват, спонсоры?</li>
-            </ol>
-            <p>Если на какой-то вопрос нет ответа, именно там проект и сломается. Я задаю их в начале каждого проекта.</p>
-          </div>
-          <div class="body" data-l="kk">
-            <p>Алаңды немесе әртісті брондамас бұрын осыларға жауап беріңіз:</p>
-            <ol>
-              <li>Нақты кім келеді және олар бұл үшін неге үйден шығуы керек?</li>
-              <li>Қонақ шығар кезде не сезінуі немесе есінде не қалуы керек?</li>
-              <li>Нақты бюджет қандай, күтпеген жағдайларға 15% резервпен қоса?</li>
-              <li>Іс-шара күні бірдеңе дұрыс болмаса, соңғы шешімді кім қабылдайды?</li>
-              <li>Табыс сандармен қалай көрінеді: билеттер, қамту, демеушілер?</li>
-            </ol>
-            <p>Бір сұраққа жауап болмаса, жоба дәл сол жерден бұзылады. Мен оларды әр жобаның басында қоямын.</p>
-          </div>
-        </details>
-
-      </div>
-    </section>
-
-    <section aria-labelledby="h-frames">
-      <h2 class="label" id="h-frames"><span data-l="en">Frames</span><span data-l="ru">Кадры</span><span data-l="kk">Кадрлар</span></h2>
-      <div class="frames">
-        <figure>
-          <div class="frame"><span class="slot">photos/fest.jpg</span><img src="photos/fest.jpg" alt="Oyu Fest main stage" loading="lazy" onerror="this.remove()"></div>
-          <figcaption><span data-l="en">Oyu Fest, main stage</span><span data-l="ru">Oyu Fest, главная сцена</span><span data-l="kk">Oyu Fest, басты сахна</span></figcaption>
-        </figure>
-        <figure>
-          <div class="frame"><span class="slot">photos/set.jpg</span><img src="photos/set.jpg" alt="On a film set" loading="lazy" onerror="this.remove()"></div>
-          <figcaption><span data-l="en">On set</span><span data-l="ru">На площадке</span><span data-l="kk">Түсірілім алаңында</span></figcaption>
-        </figure>
-        <figure>
-          <div class="frame"><span class="slot">photos/live.jpg</span><img src="photos/live.jpg" alt="Oyu Live session" loading="lazy" onerror="this.remove()"></div>
-          <figcaption><span data-l="en">Oyu Live session</span><span data-l="ru">Сессия Oyu Live</span><span data-l="kk">Oyu Live сессиясы</span></figcaption>
-        </figure>
-        <figure>
-          <div class="frame"><span class="slot">photos/backstage.jpg</span><img src="photos/backstage.jpg" alt="Backstage" loading="lazy" onerror="this.remove()"></div>
-          <figcaption><span data-l="en">Backstage</span><span data-l="ru">Бэкстейдж</span><span data-l="kk">Сахна артында</span></figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section aria-labelledby="h-contact" id="contact">
-      <h2 class="label" id="h-contact"><span data-l="en">Contact</span><span data-l="ru">Контакты</span><span data-l="kk">Байланыс</span></h2>
-      <p>
-        <span data-l="en">Have an event, a film or a team to train? Write to me.</span>
-        <span data-l="ru">Есть событие, фильм или команда, которую нужно обучить? Напишите мне.</span>
-        <span data-l="kk">Іс-шара, фильм немесе оқытатын команда бар ма? Маған жазыңыз.</span>
-      </p>
-      <div class="email-row">
-        <a class="email" id="email" href="mailto:qesha88@gmail.com">qesha88@gmail.com</a>
-        <button type="button" class="copy" id="copy-email">
-          <span data-l="en">Copy</span><span data-l="ru">Скопировать</span><span data-l="kk">Көшіру</span>
-        </button>
-      </div>
-      <ul class="socials">
-        <li><a href="https://www.instagram.com/oyu.fest/" target="_blank" rel="noopener">@oyu.fest ↗</a></li>
-        <li><a href="https://www.instagram.com/oyu.live" target="_blank" rel="noopener">@oyu.live ↗</a></li>
-        <li><a href="https://www.instagram.com/qara.studios/" target="_blank" rel="noopener">@qara.studios ↗</a></li>
-        <li><a href="https://youtube.com/@oyulive" target="_blank" rel="noopener">YouTube ↗</a></li>
-      </ul>
-    </section>
-
-  </main>
-
-  <footer>© Yerkebulan Kurishbayev · <span data-l="en">Kazakhstan</span><span data-l="ru">Казахстан</span><span data-l="kk">Қазақстан</span></footer>
+  <footer>© Yerkebulan Kurishbayev</footer>
 </div>
-
-<script>
-(function () {
-  var site = document.getElementById('site');
-  var LANGS = ['en', 'ru', 'kk'];
-  var HTML_LANG = { en: 'en', ru: 'ru', kk: 'kk' };
-
-  function setLang(lang, save) {
-    if (LANGS.indexOf(lang) < 0) lang = 'en';
-    site.setAttribute('data-lang', lang);
-    document.documentElement.lang = HTML_LANG[lang];
-    document.querySelectorAll('[data-set]').forEach(function (b) {
-      b.setAttribute('aria-pressed', String(b.getAttribute('data-set') === lang));
-    });
-    if (save) { try { localStorage.setItem('lang', lang); } catch (e) {} }
-  }
-
-  function initialLang() {
-    var hash = (location.hash || '').slice(1);
-    if (hash === 'kz') hash = 'kk';
-    if (LANGS.indexOf(hash) >= 0) return hash;
-    try { var s = localStorage.getItem('lang'); if (s) return s; } catch (e) {}
-    var nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
-    return LANGS.indexOf(nav) >= 0 ? nav : 'en';
-  }
-
-  document.querySelectorAll('[data-set]').forEach(function (b) {
-    b.addEventListener('click', function () { setLang(b.getAttribute('data-set'), true); });
-  });
-  setLang(initialLang(), false);
-
-  var copyBtn = document.getElementById('copy-email');
-  var email = document.getElementById('email');
-  var DONE = { en: 'Copied', ru: 'Скопировано', kk: 'Көшірілді' };
-  copyBtn.addEventListener('click', function () {
-    var lang = site.getAttribute('data-lang');
-    var original = copyBtn.innerHTML;
-    function done() {
-      copyBtn.textContent = DONE[lang] || DONE.en;
-      setTimeout(function () { copyBtn.innerHTML = original; }, 1600);
-    }
-    function selectText() {
-      var r = document.createRange(); r.selectNodeContents(email);
-      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
-    }
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(email.textContent.trim()).then(done, selectText);
-    } else {
-      selectText();
-    }
-  });
-})();
-</script>
+<script src="assets/site.js"></script>
 </body>
 </html>
