@@ -1,0 +1,113 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Ital;src:url("fonts/Italiana-Regular.ttf")}
+@font-face{font-family:Mono;src:url("fonts/DMMono-Regular.ttf")}
+@font-face{font-family:Jura;src:url("fonts/Jura-Light.ttf")}
+html,body{margin:0;background:#0a0b12}
+svg{display:block}
+</style></head><body>
+<svg id="c" width="1200" height="1700" viewBox="0 0 1200 1700" xmlns="http://www.w3.org/2000/svg"></svg>
+<script>
+const NS='http://www.w3.org/2000/svg', svg=document.getElementById('c');
+const INK='#0a0b12', GOLD='#c8a35e', BLUE='#4a6584', BONE='#e8e2d4', EMBER='#d2492f';
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e}
+function text(s,x,y,o){const t=el('text',Object.assign({x,y,fill:BONE,'font-family':'Mono','font-size':11,'letter-spacing':2.2},o||{}));t.textContent=s;return t}
+el('rect',{x:0,y:0,width:1200,height:1700,fill:INK});
+
+// one shared signal drives the ornament field and the waveform
+const sig=(u,v)=>{ // u,v in [0,1]
+  const w=Math.sin(u*Math.PI*2.2 - v*Math.PI*1.4)*0.5+0.5;
+  const env=Math.exp(-Math.pow((u-0.58)*2.1,2) - Math.pow((v-0.46)*1.7,2));
+  return Math.min(1, 0.12 + 0.88*Math.pow(w,1.6)*(0.35+0.65*env));
+};
+
+// ram's-horn module: stem + two log spirals, mirrored top/bottom
+function hornPath(){
+  const pts=[]; const cx=-0.27, cy=-0.30, r0=0.27, turns=1.62, N=90;
+  for(let i=0;i<=N;i++){const th=i/N*turns*Math.PI*2; const r=r0*Math.pow(0.30, i/N);
+    pts.push([cx + r*Math.cos(th), cy - r*Math.sin(th)]);}
+  let dL='M0,0 L0,-0.30 '+pts.map(p=>'L'+p[0].toFixed(4)+','+p[1].toFixed(4)).join(' ');
+  let dR='M0,-0.30 '+pts.map(p=>'L'+(-p[0]).toFixed(4)+','+p[1].toFixed(4)).join(' ');
+  return dL+' '+dR;
+}
+const H=hornPath();
+el('defs',{}).innerHTML='<g id="m"><path d="'+H+'"/><path d="'+H+'" transform="rotate(180)"/></g>';
+
+const FX=176, FY=150, CELL=94, COLS=9, ROWS=9;
+const field=el('g',{fill:'none','stroke-linecap':'round','stroke-linejoin':'round'});
+for(let j=0;j<ROWS;j++)for(let i=0;i<COLS;i++){
+  const a=sig(i/(COLS-1), j/(ROWS-1));
+  const cx=FX+CELL*i+CELL/2, cy=FY+CELL*j+CELL/2, s=CELL*(0.42+0.50*a);
+  const col=a>0.5?GOLD:BLUE, op=(0.28+0.72*a).toFixed(3);
+  el('use',{href:'#m',transform:'translate('+cx+','+cy+') scale('+s.toFixed(2)+')',
+    stroke:col,'stroke-opacity':op,'stroke-width':(1.05/s*(0.75+0.75*a)).toFixed(4)},field);
+}
+// faint cell registration marks
+for(let j=0;j<=ROWS;j++)for(let i=0;i<=COLS;i++){
+  const x=FX+CELL*i, y=FY+CELL*j;
+  el('path',{d:'M'+(x-3)+','+y+'h6M'+x+','+(y-3)+'v6',stroke:BLUE,'stroke-opacity':0.45,'stroke-width':0.6});
+}
+
+// waveform: the same signal sampled along the crest row
+const WY=1118, WH=54, BARS=184, WX0=FX, WX1=FX+CELL*COLS, step=(WX1-WX0)/(BARS-1);
+let peak={x:0,h:0};
+for(let k=0;k<BARS;k++){
+  const u=k/(BARS-1); let a=0; for(let r=0;r<ROWS;r++) a+=sig(u,r/(ROWS-1)); a/=ROWS;
+  const jitter=0.82+0.18*Math.sin(k*1.93)*Math.cos(k*0.71);
+  const h=Math.max(1.5, WH*Math.pow(a,1.25)*jitter*1.55);
+  const x=WX0+k*step; if(h>peak.h) peak={x,h};
+  el('line',{x1:x,x2:x,y1:WY-h,y2:WY+h,stroke:a>0.42?GOLD:BLUE,'stroke-opacity':(0.35+0.65*a).toFixed(3),'stroke-width':1.1});
+}
+el('line',{x1:WX0,x2:WX1,y1:WY,y2:WY,stroke:BLUE,'stroke-opacity':0.35,'stroke-width':0.5});
+el('circle',{cx:peak.x,cy:WY-peak.h-14,r:3.2,fill:EMBER});
+
+// film perforation on the left edge
+const PX=80, PY0=FY, PY1=WY+WH+12;
+el('line',{x1:PX+46,x2:PX+46,y1:PY0,y2:PY1,stroke:BLUE,'stroke-opacity':0.35,'stroke-width':0.5});
+let n=0;
+for(let y=PY0;y<=PY1-10;y+=23.5,n++){
+  el('rect',{x:PX,y:y,width:10,height:13,rx:2.2,fill:'none',stroke:BONE,'stroke-opacity':0.38,'stroke-width':0.8});
+  if(n%8===0) text(String(n).padStart(3,'0'),PX+17,y+10,{'font-size':8.5,'letter-spacing':1,'fill-opacity':0.45});
+}
+// ruler on the right edge, one tick per module row
+const RX=FX+CELL*COLS+34;
+for(let j=0;j<=ROWS*4;j++){const y=FY+j*CELL/4, major=j%4===0;
+  el('line',{x1:RX,x2:RX+(major?12:5),y1:y,y2:y,stroke:BLUE,'stroke-opacity':major?0.7:0.4,'stroke-width':0.6});}
+text('24 FPS',RX+20,FY+4,{'font-size':8.5,'letter-spacing':1.6,'fill-opacity':0.5});
+
+// captions
+text('PLATE I',80,86,{'fill-opacity':0.85});
+text('ORNAMENT AS SIGNAL',176,86,{'fill-opacity':0.5});
+text('OYU  ·  ORNAMENT',1120,86,{'text-anchor':'end','fill-opacity':0.5});
+text('FIG. 1  QOSHQAR MÜIIZ, 81 STATES',FX,FY+CELL*ROWS+28,{'font-size':9,'fill-opacity':0.45});
+text('FIG. 2  THE SAME PATTERN, HEARD',FX,WY+WH+36,{'font-size':9,'fill-opacity':0.45});
+text('REC',peak.x+10,WY-peak.h-10.5,{'font-size':8.5,'letter-spacing':1.6,fill:EMBER});
+
+el('line',{x1:80,x2:1120,y1:1262,y2:1262,stroke:BONE,'stroke-opacity':0.16,'stroke-width':0.6});
+
+// signature
+text('YERKEBULAN KURISHBAYEV',80,1366,{'font-family':'Ital','font-size':58,'letter-spacing':7,'fill-opacity':0.96});
+text('PRODUCER  ·  EVENTS  ·  FILM  ·  LIVE MUSIC  ·  TEACHING',82,1410,{'font-size':11,'letter-spacing':3.2,'fill-opacity':0.6});
+
+// legend
+const LY=1500;
+const legend=[['i','OYU FEST','FESTIVAL'],['ii','OYU LIVE','SOUND'],['iii','QARA STUDIOS','FILM']];
+legend.forEach((r,k)=>{const y=LY+k*34;
+  text(r[0],80,y,{'font-size':10,'fill-opacity':0.45});
+  text(r[1],120,y,{'font-size':11,'letter-spacing':2.6,'fill-opacity':0.9});
+  text(r[2],290,y,{'font-size':10,'letter-spacing':2.2,'fill-opacity':0.45});
+});
+// glyphs beside legend
+const gx=440;
+el('use',{href:'#m',transform:'translate('+gx+','+(LY-4)+') scale(22)',fill:'none',stroke:GOLD,'stroke-width':(1/22).toFixed(4)});
+for(let k=0;k<9;k++){const h=[3,6,10,7,12,8,5,9,4][k]; el('line',{x1:gx-12+k*3,x2:gx-12+k*3,y1:LY+30-h/2,y2:LY+30+h/2,stroke:GOLD,'stroke-width':1});}
+el('rect',{x:gx-5,y:LY+57,width:10,height:13,rx:2.2,fill:'none',stroke:BONE,'stroke-opacity':0.6,'stroke-width':0.8});
+
+// stats
+const stats=[['10','YEARS'],['3','FEATURE FILMS'],['1','FESTIVAL']];
+stats.forEach((s,k)=>{const x=760+k*130;
+  text(s[0],x,LY+26,{'font-family':'Jura','font-size':54,'letter-spacing':0,'fill-opacity':0.92});
+  text(s[1],x+2,LY+58,{'font-size':8.5,'letter-spacing':1.8,'fill-opacity':0.5});
+});
+text('KAZAKHSTAN',1120,1640,{'text-anchor':'end','font-size':9,'letter-spacing':3,'fill-opacity':0.4});
+text('MMXXVI',80,1640,{'font-size':9,'letter-spacing':3,'fill-opacity':0.4});
+</script></body></html>
